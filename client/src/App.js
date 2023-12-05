@@ -1,27 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
+import MenuHTML from './components/menu/menuHTML'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function App() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch("/api").then(
-      response => response.json()
-    ).then(
-      data => {
-       setData(Object.values(data)[0]);
-      }
-    )
-  }, []);
-  console.log(data);
   return (
     <div>
-    {data.map((d,index) => (
-      <div key={index}>
-      {d}
-      </div>
-    ))}
+      <MenuHTML/>
     </div>
   );
 }
-
 export default App;

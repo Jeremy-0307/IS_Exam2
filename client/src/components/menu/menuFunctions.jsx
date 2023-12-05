@@ -10,7 +10,7 @@ export default function MenuFunctions() {
 
   async function loadCoffes() {
     try{
-      const response = await axios.get('cafes');
+      const response = await axios.get('coffes');
       if (response !== undefined){
         // imprimir menu en la pantalla
       }
@@ -22,6 +22,8 @@ export default function MenuFunctions() {
   useEffect(() => {
     loadCoffes();
   }, []);
+
+  const props = {};
 
   return (
     <div>

@@ -2,12 +2,6 @@ import React, {useEffect, useState} from 'react'
 
 export default function MenuFunctions() {
 
-  const info = {
-      carrito:[], //prodcutos que va comprar
-      total:[], //precio totoal
-      vuelto:0,
-  }
-
   async function loadCoffes() {
     try{
       const response = await axios.get('coffes');
@@ -19,15 +13,10 @@ export default function MenuFunctions() {
     }
   };
 
-  useEffect(() => {
-    loadCoffes();
-  }, []);
+  const buttonRef = useRef(null);
 
-  const props = {};
+  let props = {buttonRef};
 
-  return (
-    <div>
-      <Menu {...props}/>
-    </div>
-  );
+
+  return ( <Menu {...props}/> );
 }

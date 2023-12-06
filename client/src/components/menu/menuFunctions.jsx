@@ -1,22 +1,15 @@
-import React, {useEffect, useState} from 'react'
+import React, {useRef, useState} from 'react'
+import MenuHTML from './menuHTML'
 
 export default function MenuFunctions() {
 
-  async function loadCoffes() {
-    try{
-      const response = await axios.get('coffes');
-      if (response !== undefined){
-        // imprimir menu en la pantalla
-      }
-    } catch {
-      // imprimir que hubo un error
-    }
-  };
+  const [modalCoffe, setModalCoffe] = useState({
+  });
+  const modalID = 'modalCoffe';
+  const refModal = useRef(null);
 
-  const buttonRef = useRef(null);
-
-  let props = {buttonRef};
+  let props = {refModal, ...modalCoffe, setModalCoffe, modalID};
 
 
-  return ( <Menu {...props}/> );
+  return ( <MenuHTML {...props}/> );
 }

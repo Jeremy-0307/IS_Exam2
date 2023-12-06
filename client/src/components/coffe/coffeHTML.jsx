@@ -1,5 +1,5 @@
 export default function CoffeHTML(props) {
-	console.log(props);
+
 	return(	
 		<div className='card m-1 row'>
 			<div className='col-6 rounded bg-danger text-end align-self-end text-light'>
@@ -16,3 +16,31 @@ export default function CoffeHTML(props) {
 		</div>
 	);
 };
+
+export const jota = (props) => {
+
+	return(<div></div>);
+};
+
+export const CoffeModalHTML = (coffe) => {
+	return (
+		<div className='container'>
+			<div className='d-flex justify-content-center'>
+       	<img src="/capucchino.png" className="card-img-top" style={{ width: '400px', height: '400px', alignItems: 'center' }}/>
+      </div>
+      <div className='row'>
+	      <button className='btn btn-lg btn-outline-dark m-1 col'>
+	      	<b>-</b>
+	      </button>
+	      <div className='rounded m-1 col d-flex justify-content-center'>
+	      	legallize legallizelegallizelegallizelegallize
+	      </div>
+	      <button className='btn btn-lg btn-outline-danger m-1 col'>
+	      	<b>+</b>
+	      </button>
+	    </div>
+		</div>
+	);
+};
+
+

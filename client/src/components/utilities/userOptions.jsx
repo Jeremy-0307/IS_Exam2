@@ -1,8 +1,10 @@
 import {useRef} from 'react'
 
 export const increment = (currAmout, setCurrAmout, props) => {
-	const {menu, indexM} = props;
-	setCurrAmout((currAmout+1 > menu[indexM].available) ? menu[indexM].available : currAmout+1);
+	const {menu, indexM, userInfo, indexU} = props;
+	const isInBill = (indexU !== -1) ? false : true; 
+	const max = menu[indexM].available + (isInBill ? 0 : userInfo.bill[indexU].quantity);
+	setCurrAmout((currAmout+1 > max) ? max : currAmout+1);
 };
 
 export const decrement = (currAmout, setCurrAmout, props) => {
@@ -10,24 +12,26 @@ export const decrement = (currAmout, setCurrAmout, props) => {
 	setCurrAmout((currAmout-1 < 0) ? 0 : currAmout-1);
 };
 
-
-export const updateMenu = (props) => {
-	//const {userInfo, setUserInfo, currAmout, c, setMenu, indexU, indexM, menu} = props;
-	console.log('->',props);
-	// let restart = false;
-	// if (indexU !== -1 && currAmout !== 0) {
-	// 	userInfo.bill.push({name:c.name, quantity:currAmout});
-	// 	menu[indexM].available -= userInfo.bill[indexU].quantity;
-	// }
-	// else{
-	// 	if (currAmout === 0){
-	// 		menu[indexM].available += userInfo.bill[indexU].quantity;
-	// 		userInfo.bill.splice(indexU, 1);
-			
-	// 	}
-	// 	else{ 
-	// 		userInfo.bill[indexU].quantity = currAmout;
-	// 		menu[indexM].available -= userInfo.bill[indexU].quantity;
-	// 	}
-	// }
+export const updateBill = (currAmout, props) => {
+	const {userInfo, setUserInfo, c, setMenu, indexU, indexM, menu} = props;
+	const isInBill = (indexU !== -1) ? true : false; 
+	let newBill = userInfo.bill;
+	let newMenu = menu;
+	if (isInBill) {
+		if(currAmout !== 0){
+			newMenu[indexM].available -= (currAmout - newBill[indexU].quantity);
+			newBill[indexU].quantity = currAmout;
+		}
+		else{
+			newMenu[indexM].available += newBill[indexU].quantity;
+			newBill.splice(indexU, 1);
+		}
+	}
+	else if (currAmout !== 0){
+		newBill.push({name:c.name, quantity:currAmout});
+		newMenu[indexM].available -= currAmout;
+	}
+	props.setMenu(newMenu);
+	props.setUserInfo({...props.userInfo, bill:newBill})
+	props.setModalCoffe({component: <></> });
 };

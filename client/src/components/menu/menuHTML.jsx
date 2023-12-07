@@ -13,7 +13,7 @@ export default function MenuHTML(props) {
 		</button>
 			<Modal {...props}/>
 			<div ref={props.refModal} data-bs-toggle="modal" data-bs-target='#modalCoffe'/>
-			<div className='row'>
+			<div className='container bg-white b-3 p-3 row rounded shadow'>
 				{props.menu.map((c, index) => (
 					<div  key={index} className='col-4 p-1' onClick={() => CoffeModal(c, props)}>
 						<CoffeHTML {...c} />

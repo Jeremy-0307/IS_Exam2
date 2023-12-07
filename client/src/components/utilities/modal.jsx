@@ -10,12 +10,7 @@ export default function Modal(props) {
           <div className={`modal-header ${titleStyle}`}>
             <b className="modal-title ">{title}</b>
           </div>
-          <div className="modal-body ">
-            {component}
-          </div>
-          <div className="modal-footer">
-            {footer}
-          </div>
+          {component}
         </div>
       </div>
     </div>
@@ -23,3 +18,6 @@ export default function Modal(props) {
 };
 
 //<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+{/*<div className="modal-footer">*/}
+ // <div className="modal-body "> 

@@ -4,16 +4,16 @@ import Modal from '../utilities/modal'
 import React, {useState} from 'react'
 
 export default function MenuHTML(props) {
-	const [coffemaker, setCoffemaker] = useState(0);
-	props = {...props, coffemaker, setCoffemaker};
 	return(	
-		<div className='container-lg'>
-		<button className='btn btn-primary'>
-			comadreja
-		</button>
+		<div className='container-lg p-4 bg-white rounded shadow'>
+			total
+			<div className='container col-2 input-group mb-3'>
+			  <span className='input-group-text'>₡</span>
+			  <input type='text' className='form-control text-truncate' value={props.userInfo.tota} disabled/>
+			</div>
 			<Modal {...props}/>
 			<div ref={props.refModal} data-bs-toggle="modal" data-bs-target='#modalCoffe'/>
-			<div className='container bg-white b-3 p-3 row rounded shadow'>
+			<div className='row m-3'>
 				{props.menu.map((c, index) => (
 					<div  key={index} className='col-4 p-1' onClick={() => CoffeModal(c, props)}>
 						<CoffeHTML {...c} />
@@ -24,5 +24,3 @@ export default function MenuHTML(props) {
 	);
 };
 
-
-// eaeffbel mas oscuro

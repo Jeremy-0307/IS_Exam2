@@ -17,7 +17,7 @@ function App() {
   const props = {userInfo, setUserInfo, machineInfo, setMachineInfo};
 
   return (
-    <div>
+    <div className=' p-4'>
       <MenuFunctions {...props}/>
     </div>
   );

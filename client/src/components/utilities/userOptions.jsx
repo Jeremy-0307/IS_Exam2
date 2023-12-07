@@ -12,23 +12,22 @@ export const decrement = (currAmout, setCurrAmout, props) => {
 
 
 export const updateMenu = (props) => {
-	const {userInfo, setUserInfo, currAmout, c, setMenu, indexU, indexM, menu} = props;
+	//const {userInfo, setUserInfo, currAmout, c, setMenu, indexU, indexM, menu} = props;
 	console.log('->',props);
-	let restart = false;
-	if (indexU === -1 && currAmout !== 0) {
-		userInfo.bill.push({name:c.name, quantity:currAmout});
-		console.log(userInfo.bill);
-		//menu[indexM].available -= userInfo.bill[indexU].quantity;
-	}
-	else if (indexU === -1) {
-		// if (currAmout === 0){
-		// 	menu[indexM].available += userInfo.bill[indexU].quantity;
-		// 	userInfo.bill.splice(indexU, 1);
+	// let restart = false;
+	// if (indexU !== -1 && currAmout !== 0) {
+	// 	userInfo.bill.push({name:c.name, quantity:currAmout});
+	// 	menu[indexM].available -= userInfo.bill[indexU].quantity;
+	// }
+	// else{
+	// 	if (currAmout === 0){
+	// 		menu[indexM].available += userInfo.bill[indexU].quantity;
+	// 		userInfo.bill.splice(indexU, 1);
 			
-		// }
-		// else{ 
-		// 	userInfo.bill[indexU].quantity = currAmout;
-		// 	menu[indexM].available -= userInfo.bill[indexU].quantity;
-		// }
-	}
+	// 	}
+	// 	else{ 
+	// 		userInfo.bill[indexU].quantity = currAmout;
+	// 		menu[indexM].available -= userInfo.bill[indexU].quantity;
+	// 	}
+	// }
 };

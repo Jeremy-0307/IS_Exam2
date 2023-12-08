@@ -4,8 +4,8 @@ export default function CoffeHTML(props) {
 
 	return(	
 		<div className='card m-1 row' >
-			<div className='col-4 rounded bg-danger text-end align-self-end text-light'>
-				 <b>Available: {props.available}</b>
+			<div className='col-4 bg-danger text-end align-self-end text-light'>
+				 Available: {props.available}
 			</div>
 			<style>{`.card {cursor: pointer;transition: transform 0.1s;}.card:hover {transform: scale(1.03);border: 1px solid red; }`}</style>
        <div className='d-flex justify-content-center'>
@@ -13,7 +13,7 @@ export default function CoffeHTML(props) {
        </div>
 			<div className='card-body'>
 			 	<h3 className='card-title'>{props.name}</h3>
-				<b className='card-text bg-dark text-light col-4 bold'> ₡ {props.price} </b>
+				<b className='card-text bg-dark text-light col-4 bold rounded p-1'> ₡ {props.price} </b>
 			</div>
 		</div>
 	);
@@ -21,7 +21,7 @@ export default function CoffeHTML(props) {
 
 export const CoffeModalHTML = (props) => {
 	const [currAmout, setCurrAmout] = useState(props.currAmoutCoffe);
-	const addedCoffe = (currAmout - (props.userInfo.bill[props.indexU]?.quantity || 0))* props.c.price;
+	const addedCoffe = (currAmout - (props.userInfo.bill[props.indexU]?.quantity || 0)) * props.c.price;
 	props = {...props, addedCoffe}
 	return (
 		<div className='container'>
@@ -47,7 +47,7 @@ export const CoffeModalHTML = (props) => {
 		        Cancel
 		      </button>
 					<div className='input-group-text col-3'>
-						  <input type='text' className='form-control text-center text-truncate' value={`₡${props.userInfo.total + addedCoffe}`} disabled/>
+						<input type='text' className='form-control text-center text-truncate' value={`₡${props.userInfo.total + addedCoffe}`} disabled/>
 		      </div>
 		      <button className='btn btn-lg btn-danger col-2' data-bs-dismiss='modal' onClick={() => updateBill(currAmout, props)}>
 		        Confirm

@@ -9,7 +9,6 @@ export const overDose = (Alien, userInfo) => {
   return (total >= userInfo.total)?true:false; 
 };
 
-
 export const minusCoin = (Alien, setAlien, index) => {
   let updatedAlien = [...Alien];
   updatedAlien[index].quantity += (updatedAlien[index].quantity === 0)?0:-1;
@@ -31,6 +30,9 @@ export const moneySoFar = (Alien) => {
 };
 
 
+
+
+
 export const ComadrejaRabin = (props) => {
   const {Alien, setAlien} = props;
 
@@ -47,6 +49,7 @@ export const ComadrejaRabin = (props) => {
           </tr>
         </thead>
         <tbody>
+
           {Alien.map  ((item, index) => (
             <tr key={index}>
               <td className='col-4'>₡ {item.coin}</td>
@@ -59,24 +62,29 @@ export const ComadrejaRabin = (props) => {
               </td>
             </tr>
           ))}
-        </tbody>
-        <tr key='total row'>
+          <tr key='total row'>
           <td><h3>Total</h3></td>
           <td>
             <div className='input-group-text'>
               <b>&nbsp;&nbsp;</b><input type='text' className='form-control form-control-sm text-center text-truncate' value={`₡ ${moneySoFar(Alien)}`} disabled/>
             </div>
           </td>
+          <td></td>
         </tr>
         <tr key='pagar row'>
-          <td><h3>A pagar</h3></td>
+          <td><h3>To pay</h3></td>
           <td>
             <div className='input-group-text'>
               <b>&nbsp;&nbsp;</b><input type='text' className='form-control form-control-sm text-center text-truncate' value={`₡ ${props.userInfo.total}`} disabled/>
             </div>
           </td>
+          <td></td>
         </tr>
+        </tbody>
       </table>
+      <div className="d-flex row justify-content-end">
+        <button className='btn btn-light btn-lg'> Pay </button>
+      </div>
     </>
   );
 };
@@ -89,8 +97,8 @@ export default function Transaction(props) {
         onClick={()=>{props.setAlien(comadreja)}}>
         offcanvas
       </button>
-      <div className='offcanvas offcanvas-start w-45' tabindex='-1' id='offcanvasExample' aria-labelledby='offcanvasExampleLabel'>
-        <div className='offcanvas-body'>
+      <div className='offcanvas offcanvas-start w-45' tabIndex='-1' id='offcanvasExample' aria-labelledby='offcanvasExampleLabel'>
+        <div className='offcanvas-body container '>
           {/*<h1>Bill</h1>
           <table className="table">
             <thead>
@@ -110,8 +118,8 @@ export default function Transaction(props) {
               ))}
             </tbody>
           </table>*/}
-        <ComadrejaRabin{...props}/>
-          <button className='btn btn-light'> >> </button>
+        <ComadrejaRabin className='row'{...props}/>
+          {/*<button className='btn btn-light'> >> </button>*/}
         </div>
       </div>
 

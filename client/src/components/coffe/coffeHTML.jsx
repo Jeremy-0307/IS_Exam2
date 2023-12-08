@@ -1,7 +1,7 @@
 import {increment, decrement, updateBill} from '../utilities/userOptions'
-import {useState, useEffect} from 'react'
-export default function CoffeHTML(props) {
+import {useState} from 'react'
 
+export default function CoffeHTML(props) {
 	return(	
 		<div className='card m-1 row' >
 			<div className='col-4 bg-danger text-end align-self-end text-light fw-bold'>
@@ -9,7 +9,7 @@ export default function CoffeHTML(props) {
 			</div>
 			<style>{`.card {cursor: pointer;transition: transform 0.1s;}.card:hover {transform: scale(1.03);border: 1px solid red; }`}</style>
        <div className='d-flex justify-content-center'>
-       	<img src={props.img} className='card-img-top' style={{ width: '100px', height: '100px', alignItems: 'center' }}/>
+       	<img src={props.img} className='card-img-top align-center' style={{ width: '100px', height: '100px' }} alt={props.name}/>
        </div>
 			<div className='card-body'>
 			 	<h3 className='card-title'>{props.name}</h3>
@@ -22,7 +22,8 @@ export default function CoffeHTML(props) {
 export const CoffeModalHTML = (props) => {
 	const [currAmout, setCurrAmout] = useState(props.currAmoutCoffe);
 	const addedCoffe = (currAmout - (props.userInfo.bill[props.indexU]?.quantity || 0)) * props.c.price;
-	props = {...props, addedCoffe}
+	props = {...props, addedCoffe};
+
 	return (
 		<div className='container'>
 		  <div className='modal-body col'>

@@ -5,8 +5,17 @@ import React, {useState} from 'react'
 import Transaction from '../transaction/transactionHTML'
 
 export default function MenuHTML(props) {
+		  const [Alien, setAlien] = useState(
+	  [
+	    {coin:25,   quantity:0},
+	    {coin:50,   quantity:0},
+	    {coin:100,  quantity:0},
+	    {coin:500,  quantity:0},
+	  ]);
+		props = {...props, Alien, setAlien};
+
 	return(	
-		<div className='container-lg p-4 rounded shadow' style={{ backgroundColor: '#FFF' }}>
+		<div className='container-lg p-4 rounded shadow' style={{ backgroundColor: '#1a1d23' }}>
 			<Modal {...props}/>
 			<div ref={props.refModal} data-bs-toggle="modal" data-bs-target='#modalCoffe'/>
 			<div className='row m-3'>

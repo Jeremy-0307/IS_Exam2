@@ -4,7 +4,7 @@ export default function CoffeHTML(props) {
 
 	return(	
 		<div className='card m-1 row' >
-			<div className='col-4 bg-danger text-end align-self-end text-light'>
+			<div className='col-4 bg-danger text-end align-self-end text-light fw-bold'>
 				 Available: {props.available}
 			</div>
 			<style>{`.card {cursor: pointer;transition: transform 0.1s;}.card:hover {transform: scale(1.03);border: 1px solid red; }`}</style>
@@ -13,7 +13,7 @@ export default function CoffeHTML(props) {
        </div>
 			<div className='card-body'>
 			 	<h3 className='card-title'>{props.name}</h3>
-				<b className='card-text bg-dark text-light col-4 bold rounded p-1'> ₡ {props.price} </b>
+				<b className='rounded p-1'> ₡ {props.price} </b>
 			</div>
 		</div>
 	);

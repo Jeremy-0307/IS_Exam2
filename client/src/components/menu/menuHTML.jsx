@@ -6,11 +6,9 @@ import React, {useState} from 'react'
 export default function MenuHTML(props) {
 	return(	
 		<div className='container-lg p-4 bg-white rounded shadow'>
-			total
-			<div className='container col-2 input-group mb-3'>
-			  <span className='input-group-text'>₡</span>
-			  <input type='text' className='form-control text-truncate' value={props.userInfo.tota} disabled/>
-			</div>
+			<div className='input-group-text col-2'>
+					<b>Total:&nbsp;&nbsp;</b><input type='text' className='form-control text-center text-truncate' value={`₡ ${props.userInfo.total}`} disabled/>
+      </div>
 			<Modal {...props}/>
 			<div ref={props.refModal} data-bs-toggle="modal" data-bs-target='#modalCoffe'/>
 			<div className='row m-3'>

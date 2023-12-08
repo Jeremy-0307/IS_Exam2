@@ -6,7 +6,6 @@ export const CoffeModal = (c, props) => {
 
 	const indexM = props.menu.findIndex(item => item.name === c.name);
 	const indexU = props.userInfo.bill.findIndex(i => i.name === c.name);
-	console.log('bill->',props.userInfo.bill[indexU], '\nindexU->',indexU);
 	const currAmoutCoffe = (indexU !== -1) ? props.userInfo.bill[indexU].quantity : 0;
 	props = { ...props, indexU, indexM, c, currAmoutCoffe }
 	props.setModalCoffe(

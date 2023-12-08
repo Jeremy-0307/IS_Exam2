@@ -13,10 +13,13 @@ export const decrement = (currAmout, setCurrAmout, props) => {
 };
 
 export const updateBill = (currAmout, props) => {
+
 	const {userInfo, setUserInfo, c, setMenu, indexU, indexM, menu} = props;
 	const isInBill = (indexU !== -1) ? true : false; 
+
 	let newBill = userInfo.bill;
 	let newMenu = menu;
+
 	if (isInBill) {
 		if(currAmout !== 0){
 			newMenu[indexM].available -= (currAmout - newBill[indexU].quantity);
@@ -31,7 +34,9 @@ export const updateBill = (currAmout, props) => {
 		newBill.push({name:c.name, quantity:currAmout});
 		newMenu[indexM].available -= currAmout;
 	}
-	props.setMenu(newMenu);
-	props.setUserInfo({...props.userInfo, bill:newBill})
+	setMenu(newMenu);
+	setUserInfo({ ...userInfo, total: userInfo.total + props.addedCoffe,
+	  bill: newBill
+	});
 	props.setModalCoffe({component: <></> });
 };

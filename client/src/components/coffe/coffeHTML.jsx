@@ -30,13 +30,13 @@ export const CoffeModalHTML = (props) => {
 		      <img src={props.c.img} className='card-img-top' style={{ width: '200px', height: '200px', alignItems: 'center' }}/>
 		    </div>
 		    <div className='row justify-content-center'>
-		      <button className='btn m-1 btn-outline-secondary col-1' onClick={() => {decrement(currAmout, setCurrAmout, props)}}>
+		      <button className='btn m-1 btn-outline-danger col-1' onClick={() => {decrement(currAmout, setCurrAmout, props)}}>
 		        -
 		      </button>
 		      <div className='m-1 col-2'>
 		      	<input type='text' className='form-control text-center text-truncate' value={currAmout} disabled/>
 		      </div> 
-		      <button className='btn m-1 btn-outline-danger col-1' onClick={() => {increment(currAmout, setCurrAmout, props)}}>
+		      <button className='btn m-1 btn-outline-success col-1' onClick={() => {increment(currAmout, setCurrAmout, props)}}>
 		        +
 		      </button>
 		    </div>
@@ -49,7 +49,7 @@ export const CoffeModalHTML = (props) => {
 					<div className='input-group-text col-3'>
 						<input type='text' className='form-control text-center text-truncate' value={`₡${props.userInfo.total + addedCoffe}`} disabled/>
 		      </div>
-		      <button className='btn btn-lg btn-danger col-2' data-bs-dismiss='modal' onClick={() => updateBill(currAmout, props)}>
+		      <button className='btn btn-lg btn-light col-2' data-bs-dismiss='modal' onClick={() => updateBill(currAmout, props)}>
 		        Confirm
 		      </button>
 		    </div>

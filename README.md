@@ -1,4 +1,4 @@
-@ How to run the project
+# How to run the project
 
 1. Make sure to have React&Node installed before hand
 2. Download zip and descompress it
@@ -9,3 +9,7 @@
 8. Run ```npm install --legacy-peers-deps```
 9. Run ```npm start```
 10. Open the program on ```http:localhost:5000```
+
+# Tests
+1. Go to server/
+2. Run ```npm test```

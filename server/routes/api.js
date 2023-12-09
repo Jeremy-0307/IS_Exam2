@@ -6,8 +6,8 @@ const router = express.Router();
 const CoffeRoutes = require('./coffeRoutes/coffeRoutes');
 router.use('/coffe', CoffeRoutes);
 
-//-----Purse-----//
-const PurseRoutes = require('./purseRoutes/purseRoutes');
-router.use('/Purse', PurseRoutes);
+//-----wallet-----//
+const WalletRoutes = require('./walletRoutes/walletRoutes');
+router.use('/wallet', WalletRoutes);
 
 module.exports = router;

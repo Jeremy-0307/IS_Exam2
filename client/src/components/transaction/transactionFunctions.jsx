@@ -1,36 +1,54 @@
 import axios from 'axios';
 import {serverURL} from '../utilities/constants'
+import {ChangeModal} from './transactionHTML'
 
-export const checkAmount = (Purse, userInfo) => {
-  const total = Purse.reduce((accumulator, i) => {
-    return accumulator + i.quantity * i.coin;
+export const checkAmount = (wallet, userInfo) => {
+  const total = wallet.reduce((curr, i) => {
+    return curr + i.quantity * i.coin;
   }, 0);
   return (total >= userInfo.total)?true:false; 
 };
 
-export const minusCoin = (Purse, setUserInfo, index) => {
-  let updatedPurse = [...Purse];
-  updatedPurse[index].quantity += (updatedPurse[index].quantity === 0)?0:-1;
-  setUserInfo((prev) => ({ ...prev, purse: updatedPurse }));
+export const minusCoin = (wallet, setUserInfo, index) => {
+  let updatedwallet = [...wallet];
+  updatedwallet[index].quantity += (updatedwallet[index].quantity === 0)?0:-1;
+  setUserInfo((prev) => ({ ...prev, wallet: updatedwallet }));
 };
 
-export const plusCoin = (Purse, setUserInfo, index) => {
-  let updatedPurse = [...Purse];
-  updatedPurse[index].quantity += (updatedPurse[index].quantity === 999)?999:1;
-  setUserInfo((prev) => ({ ...prev, purse: updatedPurse }));
+export const plusCoin = (wallet, setUserInfo, index) => {
+  let updatedwallet = [...wallet];
+  updatedwallet[index].quantity += (updatedwallet[index].quantity === 999)?999:1;
+  setUserInfo((prev) => ({ ...prev, wallet: updatedwallet }));
 };
 
-export const currentMoney = (Purse) => {
-  const total = Purse.reduce((accumulator, currentValue) => {
-    return accumulator + currentValue.quantity * currentValue.coin;
+export const currentMoney = (wallet) => {
+  const total = wallet.reduce((curr, currentValue) => {
+    return curr + currentValue.quantity * currentValue.coin;
   }, 0);
   return total;
 };
 
 export async function pay(props) {
+  const { userInfo, setModalCoffe, refModal } = props;
   try {
-    const serverResponse = await axios.put(`${serverURL}coffe`, { purse: props.userInfo.purse, bill: props.userInfo.bill });
+    const totalPayment = currentMoney(userInfo.wallet) - userInfo.total;
+    const serverResponse = await axios.put(`${serverURL}wallet`, {
+      change: totalPayment,
+      bill: userInfo.bill
+    });
+    if (serverResponse.data !== false) {
+      const change = serverResponse.data;
+      props = {...props, change};
+      setModalCoffe({
+        title: 'Change',
+        titleStyle: 'bg-danger fw-bold fs-3 text-white bold justify-content-center',
+        component:<ChangeModal {...props}/>,
+        size: "modal-lg"
+      });
+      refModal.current.click();
+    }
+    console.log(serverResponse.data);
   } catch (error) {
-    console.log('error');
+    console.error('Error:', error);
   }
-};
+}

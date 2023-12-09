@@ -16,8 +16,3 @@ export default function Modal(props) {
     </div>
   );
 };
-
-//<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-{/*<div className="modal-footer">*/}
- // <div className="modal-body "> 

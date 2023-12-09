@@ -6,7 +6,7 @@ import Canvass from '../transaction/transactionHTML'
 
 export default function MenuHTML(props) {
 	const {userInfo, setUserInfo} = props;
-	const comadreja = userInfo.purse.map(item => ({...item, quantity: 0}));
+	const comadreja = userInfo.wallet.map(item => ({...item, quantity: 0}));
 	return(	
 		<div className='container-lg p-4 rounded shadow' style={{ backgroundColor: '#1a1d23' }}>
 			<Modal {...props}/>
@@ -17,7 +17,7 @@ export default function MenuHTML(props) {
 						<b>Total:&nbsp;&nbsp;</b><input type='text' className='form-control text-center text-truncate' value={`₡ ${userInfo.total}`} disabled/>
 		      </div>
 		      <button className='btn btn-light col-2' type='button' data-bs-toggle='offcanvas' data-bs-target='#offcanvasExample' aria-controls='offcanvasExample'
-		        onClick={()=>{setUserInfo({...userInfo, purse:comadreja})}}>
+		        onClick={()=>{setUserInfo({...userInfo, wallet:comadreja})}}>
 		        <b>>></b>
 		      </button>
 		      <Canvass {...props}/>

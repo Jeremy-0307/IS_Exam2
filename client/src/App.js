@@ -8,7 +8,13 @@ function App() {
     bill:[],
     total:0,
     money:0,
-    purse:[{coin:25, quantity:0}]
+    wallet:
+    [
+      {coin:25, quantity:0},
+      {coin:50, quantity:0},
+      {coin:100, quantity:0},
+      {coin:500, quantity:0}
+    ]
   });
 
   const props = {userInfo, setUserInfo};

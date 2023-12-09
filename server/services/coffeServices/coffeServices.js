@@ -24,9 +24,25 @@ async function getAllAvailable(req) {
   }
 };
 
+async function checkEnoughCoffee(bill) {
+  const availableCoffees = await CoffeModel.getAll();
+  let validBill = true;
+  const notFound = undefined;
+  for (const item of bill) {
+    const coffee = availableCoffees.find((c) => c.name === item.name);
+    if (coffee === notFound) {
+      validBill = false;
+      break;
+    } else if (coffee.available - item.quantity < 0 || item.quantity < 0) {
+      validBill = false;
+      break;
+    }
+  }
+  return validBill;
+};
+
 async function update(bill) {
   try {
-    console.log(bill);
     const coffes = await CoffeModel.update(bill);
     return true;
   } catch (error) {
@@ -38,5 +54,6 @@ async function update(bill) {
 module.exports = {
   getAll,
   update,
-  getAllAvailable
+  getAllAvailable,
+  checkEnoughCoffee
 };

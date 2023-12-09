@@ -1,7 +1,7 @@
 import {increment, decrement, updateBill} from '../utilities/userOptions'
 import {useState} from 'react'
 
-export default function CoffeHTML(props) {
+export default function CoffeeHTML(props) {
 	return(	
 		<div className='card m-1 row' >
 			<div className='col-4 bg-danger text-end align-self-end text-light fw-bold'>
@@ -19,11 +19,10 @@ export default function CoffeHTML(props) {
 	);
 };
 
-export const CoffeModalHTML = (props) => {
-	const [currAmout, setCurrAmout] = useState(props.currAmoutCoffe);
-	const addedCoffe = (currAmout - (props.userInfo.bill[props.indexU]?.quantity || 0)) * props.c.price;
-	props = {...props, addedCoffe};
-
+export const CoffeeModalHTML = (props) => {
+	const [currAmount, setCurrAmount] = useState(props.currAmountCoffee);
+	const addedCoffee = (currAmount - (props.userInfo.bill[props.indexU]?.quantity || 0)) * props.c.price;
+	props = {...props, addedCoffee};
 	return (
 		<div className='container'>
 		  <div className='modal-body col'>
@@ -31,26 +30,26 @@ export const CoffeModalHTML = (props) => {
 		      <img src={props.c.img} className='card-img-top' style={{ width: '200px', height: '200px', alignItems: 'center' }}/>
 		    </div>
 		    <div className='row justify-content-center'>
-		      <button className='btn m-1 btn-outline-danger col-1' onClick={() => {decrement(currAmout, setCurrAmout, props)}}>
+		      <button className='btn m-1 btn-outline-danger col-1' onClick={() => {decrement(currAmount, setCurrAmount, props)}}>
 		        -
 		      </button>
 		      <div className='m-1 col-2'>
-		      	<input type='text' className='form-control text-center text-truncate' value={currAmout} disabled/>
+		      	<input type='text' className='form-control text-center text-truncate' value={currAmount} disabled/>
 		      </div> 
-		      <button className='btn m-1 btn-outline-success col-1' onClick={() => {increment(currAmout, setCurrAmout, props)}}>
+		      <button className='btn m-1 btn-outline-success col-1' onClick={() => {increment(currAmount, setCurrAmount, props)}}>
 		        +
 		      </button>
 		    </div>
 		  </div>
 			 <div className='modal-footer position-static row'>
 				<div className='row text-center justify-content-between' >
-		      <button className='btn btn-lg btn-secondary col-2' data-bs-dismiss='modal' onClick={() => props.setModalCoffe({component: <></> })}>
+		      <button className='btn btn-lg btn-secondary col-2' data-bs-dismiss='modal' onClick={() => props.setModalCoffee({component: <></> })}>
 		        Cancel
 		      </button>
 					<div className='input-group-text col-3'>
-						<input type='text' className='form-control text-center text-truncate' value={`₡${props.userInfo.total + addedCoffe}`} disabled/>
-		      </div>
-		      <button className='btn btn-lg btn-light col-2' data-bs-dismiss='modal' onClick={() => updateBill(currAmout, props)}>
+						<input type='text' className='form-control text-center text-truncate' value={`₡${props.userInfo.total + addedCoffee}`} disabled/>
+		      		</div>
+		      <button className='btn btn-lg btn-light col-2' data-bs-dismiss='modal' onClick={() => updateBill(currAmount, props)}>
 		        Confirm
 		      </button>
 		    </div>

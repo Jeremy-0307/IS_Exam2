@@ -5,14 +5,13 @@ import {serverURL} from '../utilities/constants'
 
 export default function MenuFunctions(props) {
 
-  const [modalCoffe, setModalCoffe] = useState({});
+  const [modalCoffee, setModalCoffee] = useState({});
   const [menu, setMenu] = useState([]);
 
   useEffect(() => {
-    async function getAvailableCoffes() {
+    async function getAvailableCoffees() {
       try {
-        const serverResponse = await axios.get(`${serverURL}coffe/`);
-        console.log(serverResponse);
+        const serverResponse = await axios.get(`${serverURL}coffee/`);
         if(serverResponse.data){
           setMenu(serverResponse.data);
         }
@@ -20,13 +19,13 @@ export default function MenuFunctions(props) {
         console.log('error');
       }
     }
-    getAvailableCoffes();
+    getAvailableCoffees();
   }, []);
 
-  const modalID = 'modalCoffe';
+  const modalID = 'modalCoffee';
   const refModal = useRef(null);
 
-  props = { ...props, refModal, ...modalCoffe, setModalCoffe, setMenu, menu, modalID};
+  props = { ...props, refModal, ...modalCoffee, setModalCoffee, setMenu, menu, modalID};
 
   return ( <MenuHTML {...props}/> );
 }

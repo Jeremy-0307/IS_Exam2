@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const WalletModel = require('../../models/walletModel/walletModel');
-const CoffeServices = require('../coffeServices/coffeServices');
-const CoffeModel = require('../../models/coffeModel/coffeModel');
+const CoffeeServices = require('../coffeeServices/coffeeServices');
+const CoffeeModel = require('../../models/coffeeModel/coffeeModel');
 
 async function getAll(req) {
   try {
@@ -36,14 +36,14 @@ async function calcChange(change) {
 
 async function checkPurchase(bill, change) {
   try {
-    const isCoffeeAvailable = await CoffeServices.checkEnoughCoffee(bill);
+    const isCoffeeeAvailable = await CoffeeServices.checkEnoughCoffeee(bill);
     
-    if (isCoffeeAvailable === true) {
+    if (isCoffeeeAvailable === true) {
       const moneyAvailable = await getAll();
       const isValidMoney = await calcChange(change, moneyAvailable);
 
       if (isValidMoney.change === 0) {
-        await CoffeModel.update(bill);
+        await CoffeeModel.update(bill);
         await WalletModel.update(isValidMoney.changeArray);
         return isValidMoney.changeArray;
       }

@@ -29,7 +29,7 @@ export const currentMoney = (wallet) => {
 };
 
 export async function pay(props) {
-  const { userInfo, setModalCoffe, refModal } = props;
+  const { userInfo, setModalCoffee, refModal } = props;
   try {
     const totalPayment = currentMoney(userInfo.wallet) - userInfo.total;
     let change = -1;
@@ -40,7 +40,7 @@ export async function pay(props) {
     if (serverResponse.data !== false) {
       change = serverResponse.data;
       props = {...props, change};
-      setModalCoffe({
+      setModalCoffee({
         title: 'Change',
         titleStyle: 'bg-danger fw-bold fs-3 text-white bold justify-content-center',
         component:<ChangeModal {...props}/>,
@@ -50,7 +50,7 @@ export async function pay(props) {
     }
     else{
       props = {...props, change};
-      setModalCoffe({
+      setModalCoffee({
         title: 'Error',
         titleStyle: 'bg-danger fw-bold fs-3 text-white bold justify-content-center',
         component:<ChangeModal {...props}/>,

@@ -1,5 +1,5 @@
-import CoffeHTML from '../coffe/coffeHTML'
-import {CoffeModal} from '../coffe/coffeFunctions'
+import CoffeeHTML from '../coffee/coffeeHTML'
+import {CoffeeModal} from '../coffee/coffeeFunctions'
 import Modal from '../utilities/modal'
 import React, {useState} from 'react'
 import Canvass from '../transaction/transactionHTML'
@@ -10,7 +10,7 @@ export default function MenuHTML(props) {
 	return(	
 		<div className='container-lg p-4 rounded shadow' style={{ backgroundColor: '#1a1d23' }}>
 			<Modal {...props}/>
-			<div ref={props.refModal} data-bs-toggle="modal" data-bs-target='#modalCoffe'/>
+			<div ref={props.refModal} data-bs-toggle="modal" data-bs-target='#modalCoffee'/>
 			<div className='row m-3'>
 				<div className='row'>
 					<div className='input-group-text col-2'>
@@ -23,8 +23,8 @@ export default function MenuHTML(props) {
 		      <Canvass {...props}/>
 		    </div>
 					{props.menu.map((c, index) => (
-					<div  key={index} className='col-4 p-1' onClick={() => CoffeModal(c, props)}>
-						<CoffeHTML {...c} />
+					<div  key={index} className='col-4 p-1' onClick={() => CoffeeModal(c, props)}>
+						<CoffeeHTML {...c} />
 					</div>
 				))}
 			</div>

@@ -6,9 +6,9 @@ async function getAll(req) {
   const rawData = fs.readFileSync(databasePath, 'utf-8');
   const database = JSON.parse(rawData);
   try {
-      return database.coffe;
+      return database.coffee;
   } catch (error) {
-      console.error('Error: coffe', error);
+      console.error('Error: coffee', error);
       throw error;
   }
 };
@@ -20,10 +20,10 @@ async function update(bill) {
   
   try {
     bill.forEach((curr) => {
-      const coffeToUpdate = database.coffe.find((item) => item.name === curr.name);
-      if (coffeToUpdate) {
-        console.log(coffeToUpdate.name, coffeToUpdate.available, curr.quantity);
-        coffeToUpdate.available -= curr.quantity;
+      const coffeeToUpdate = database.coffee.find((item) => item.name === curr.name);
+      if (coffeeToUpdate) {
+        console.log(coffeeToUpdate.name, coffeeToUpdate.available, curr.quantity);
+        coffeeToUpdate.available -= curr.quantity;
       } else {
         console.error(`${curr.coin} not found`);
       }

@@ -12,11 +12,23 @@ test("Calculate change for a specific wallet amount", async () => {
   ]);
 });
 
+// Mock WalletModel methods
+jest.mock('../../models/walletModel/walletModel', () => ({
+  getAll: jest.fn().mockReturnValue([
+    { coin: 500, available: 20 },
+    { coin: 100, available: 30 },
+    { coin: 50, available: 50 },
+    { coin: 25, available: 25 }
+  ])
+}));
+
 test("Calculate change for a smaller wallet amount with available coins", async () => {
   // Arrange
   const wallet = 875;
+
   // Act 
   const response = await WalletService.calcChange(wallet);
+
   // Assert
   expect(response.change).toEqual(0); 
   expect(response.changeArray).toEqual([

@@ -17,7 +17,7 @@ export const ChoosePayment = (props, switchCanvass) => {
           </tr>
         </thead>
         <tbody>
-          {userInfo.wallet.map ( (item, index) => (
+          {userInfo.wallet.map((item, index) => (
             <tr key={index}>
               <td className='col-4'>₡ {item.coin}</td>
               <td className='col-4'>{item.quantity}</td>
@@ -74,12 +74,11 @@ export default function Canvass(props) {
   );
 }
 
-
 export const ChangeModal = (props) => {
   return (
     <div className='container'>
       <div className='modal-body'>
-        {props.change.length !==-1?(<table className="table text-center">
+        {props.change.length !==-1?(<table className="table">
           <thead>
             <tr>
               <th>Coin</th>
@@ -94,8 +93,12 @@ export const ChangeModal = (props) => {
               </tr>
             ))}
           </tbody>
-        </table>):(<h1 className='text-white'>Error! no se pudo realizar la transaccion... :(</h1>)}
+          <div className='input-group-text col-4'>
+            <input type='text' className='form-control text-center text-truncate' value={`₡ ${currentMoney(props.change)}`} disabled/>
+          </div>
+        </table>):(<h1 className='text-white'>Error! could not finish transaction... :(</h1>)}
       </div>
+
       <div className='modal-footer container'>
           <button className='btn btn-secondary' data-bs-dismiss="offcanvasExample" data-bs-dismiss='modal' onClick={() => window.location.reload()}>
             Ok

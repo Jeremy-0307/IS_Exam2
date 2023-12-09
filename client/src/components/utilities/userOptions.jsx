@@ -1,18 +1,18 @@
 import {useRef} from 'react'
 
-export const increment = (currAmout, setCurrAmout, props) => {
+export const increment = (currAmount, setCurrAmount, props) => {
 	const {menu, indexM, userInfo, indexU} = props;
 	const isInBill = (indexU !== -1) ? false : true; 
 	const max = menu[indexM].available + (isInBill ? 0 : userInfo.bill[indexU].quantity);
-	setCurrAmout((currAmout+1 > max) ? max : currAmout+1);
+	setCurrAmount((currAmount+1 > max) ? max : currAmount+1);
 };
 
-export const decrement = (currAmout, setCurrAmout, props) => {
+export const decrement = (currAmount, setCurrAmount, props) => {
 	const {menu, indexM} = props;
-	setCurrAmout((currAmout-1 < 0) ? 0 : currAmout-1);
+	setCurrAmount((currAmount-1 < 0) ? 0 : currAmount-1);
 };
 
-export const updateBill = (currAmout, props) => {
+export const updateBill = (currAmount, props) => {
 
 	const {userInfo, setUserInfo, c, setMenu, indexU, indexM, menu} = props;
 	const isInBill = (indexU !== -1) ? true : false; 
@@ -21,22 +21,22 @@ export const updateBill = (currAmout, props) => {
 	let newMenu = menu;
 
 	if (isInBill) {
-		if(currAmout !== 0){
-			newMenu[indexM].available -= (currAmout - newBill[indexU].quantity);
-			newBill[indexU].quantity = currAmout;
+		if(currAmount !== 0){
+			newMenu[indexM].available -= (currAmount - newBill[indexU].quantity);
+			newBill[indexU].quantity = currAmount;
 		}
 		else{
 			newMenu[indexM].available += newBill[indexU].quantity;
 			newBill.splice(indexU, 1);
 		}
 	}
-	else if (currAmout !== 0){
-		newBill.push({name:c.name, quantity:currAmout});
-		newMenu[indexM].available -= currAmout;
+	else if (currAmount !== 0){
+		newBill.push({name:c.name, quantity:currAmount});
+		newMenu[indexM].available -= currAmount;
 	}
 	setMenu(newMenu);
-	setUserInfo({ ...userInfo, total: userInfo.total + props.addedCoffe,
+	setUserInfo({ ...userInfo, total: userInfo.total + props.addedCoffee,
 	  bill: newBill
 	});
-	props.setModalCoffe({component: <></> });
+	props.setModalCoffee({component: <></> });
 };

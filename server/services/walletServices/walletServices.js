@@ -57,5 +57,6 @@ async function checkPurchase(bill, change) {
 
 
 module.exports = {
-  checkPurchase
+  checkPurchase,
+  calcChange
 };

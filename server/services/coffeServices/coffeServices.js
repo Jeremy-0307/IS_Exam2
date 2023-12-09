@@ -28,16 +28,19 @@ async function checkEnoughCoffee(bill) {
   const availableCoffees = await CoffeModel.getAll();
   let validBill = true;
   const notFound = undefined;
-  for (const item of bill) {
-    const coffee = availableCoffees.find((c) => c.name === item.name);
-    if (coffee === notFound) {
-      validBill = false;
-      break;
-    } else if (coffee.available - item.quantity < 0 || item.quantity < 0) {
-      validBill = false;
-      break;
+  if(bill !== undefined){
+    for (const item of bill) {
+      const coffee = availableCoffees.find((c) => c.name === item.name);
+      if (coffee === notFound) {
+        validBill = false;
+        break;
+      }
+      if (coffee.available - item.quantity < 0 || item.quantity < 0) {
+        validBill = false;
+        break;
+      }
     }
-  }
+  } else{ validBill = false; }
   return validBill;
 };
 

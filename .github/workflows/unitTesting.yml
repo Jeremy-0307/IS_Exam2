@@ -1,0 +1,30 @@
+name: Pruebas Unitarias
+
+on:
+  push:
+    branches:
+      - main
+      - transaction
+jobs:
+
+  server-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: CHECKING
+      uses: actions/checkout@v2
+
+    - name: Node (BACK-END)
+      uses: actions/setup-node@v2
+      with:
+        node-version: 19
+
+    - name: Instalar dependencias (BACK-END)
+      run: |
+        cd server
+        npm install --legacy-peer-deps
+
+    - name: Ejecutar pruebas BACK-END
+      run: |
+        cd server
+        npm test

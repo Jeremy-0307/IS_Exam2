@@ -12,6 +12,7 @@ export default function MenuFunctions(props) {
     async function getAvailableCoffes() {
       try {
         const serverResponse = await axios.get(`${serverURL}coffe/`);
+        console.log(serverResponse);
         if(serverResponse.data){
           setMenu(serverResponse.data);
         }

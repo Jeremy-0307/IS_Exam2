@@ -1,28 +1,29 @@
 {
   "coffe": [
-    {  
-      "name":"Americano",
+    {
+      "name": "Americano",
       "price": 850,
       "available": 10,
       "img": "/americano.png"
     },
     {
-      "name":"Capuchino",
+      "name": "Capuchino",
       "price": 950,
       "available": 8,
       "img": "/capuchino.png"
     },
     {
-      "name":"Late",
+      "name": "Late",
       "price": 1150,
       "available": 10,
       "img": "/late.png"
     },
     {
-      "name":"Mocachino",
+      "name": "Mocachino",
       "price": 850,
       "available": 10,
-      "img": "/mocachino.png"
+      "img": "/mocachino.png",
+      "quantity": -30
     }
   ],
   "purse": [

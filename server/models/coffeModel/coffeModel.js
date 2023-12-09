@@ -1,39 +1,39 @@
 const fs = require('fs');
 const path = require('path');
 
-const databasePath = path.resolve(__dirname, '../../database/database.json');
+const databasePath = path.resolve(__dirname, '../../../database.json');
 const rawData = fs.readFileSync(databasePath, 'utf-8');
 const database = JSON.parse(rawData);
 
 //---C R U D---//
 
 async function getAll(req) {
-    try {
-        console.log(database.coffe);
-        return database.coffe;
-    } catch (error) {
-        console.error('Error: coffe', error);
-        throw error;
-    }
-}
-
-async function update(req) {
-  console.log('req->',req.body);
   try {
-    const coffeeToUpdate = database.coffees.find(coffee => coffee.name === req.body.name);
-    if (coffeeToUpdate) {
-      coffeeToUpdate.name = req.body.name;
-      coffeeToUpdate.price = req.body.price;
-      fs.writeFileSync(databasePath, JSON.stringify(database, null, 2));
-      console.log('Error: coffe', error);
-    } else {
+      return database.coffe;
+  } catch (error) {
       console.error('Error: coffe', error);
-    }
+      throw error;
+  }
+};
+
+async function update(bill) {
+  try {
+    console.log(bill.jeremy);
+    bill.jeremy.forEach((coffee) => {
+      const coffeeToUpdate = database.coffe.find((item) => item.name === coffee.name);
+      if (coffeeToUpdate) {
+        coffeeToUpdate.quantity -= coffee.quantity;
+      } else {
+        console.error(`${coffee.name} not found`);
+      }
+    });
+    fs.writeFileSync(databasePath, JSON.stringify(database, null, 2));
+    return true;
   } catch (error) {
     console.error('Error: coffe', error);
     throw error;
   }
-}
+};
 
 module.exports = {
   getAll,

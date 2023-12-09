@@ -5,16 +5,13 @@ import MenuFunctions from './components/menu/menuFunctions'
 
 function App() {
   const [userInfo, setUserInfo] = useState({
-    bill:[], //cafe, cantidad
-    total:0, // total de la compra
+    bill:[],
+    total:0,
     money:0,
+    purse:[{coin:25, quantity:0}]
   });
 
-  const [machineInfo, setMachineInfo] = useState({
-    funds:0
-  });
-
-  const props = {userInfo, setUserInfo, machineInfo, setMachineInfo};
+  const props = {userInfo, setUserInfo};
 
   return (
     <div className='p-4' data-bs-theme="dark">

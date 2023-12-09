@@ -1,42 +1,10 @@
 import React, {useRef, useState} from 'react'
+import {checkAmount, minusCoin, plusCoin, currentMoney} from './transactionFunctions'
+import {CurrentBill} from '../bill/billHTML'
 
-
-export const overDose = (Alien, userInfo) => {
-  const total = Alien.reduce((accumulator, i) => {
-    return accumulator + i.quantity * i.coin;
-  }, 0);
-
-  return (total >= userInfo.total)?true:false; 
-};
-
-export const minusCoin = (Alien, setAlien, index) => {
-  let updatedAlien = [...Alien];
-  updatedAlien[index].quantity += (updatedAlien[index].quantity === 0)?0:-1;
-  setAlien(updatedAlien); // Update state directly with the modified array
-};
-
-export const plusCoin = (Alien, setAlien, index) => {
-  let updatedAlien = [...Alien];
-  updatedAlien[index].quantity += (updatedAlien[index].quantity === 999)?999:1;
-  setAlien(updatedAlien); // Update state directly with the modified array
-};
-
-
-export const moneySoFar = (Alien) => {
-  const total = Alien.reduce((accumulator, currentValue) => {
-    return accumulator + currentValue.quantity * currentValue.coin;
-  }, 0);
-  return total;
-};
-
-
-
-
-
-export const ComadrejaRabin = (props) => {
-  const {Alien, setAlien} = props;
-
-  const letfordead = overDose(Alien, props.userInfo);
+export const ChoosePayment = (props, switchCanvass) => {
+  const {userInfo, setUserInfo} = props;
+  const isValid = checkAmount(userInfo.purse, userInfo);
 
   return(
     <>
@@ -49,15 +17,14 @@ export const ComadrejaRabin = (props) => {
           </tr>
         </thead>
         <tbody>
-
-          {Alien.map  ((item, index) => (
+          {userInfo.purse?.map ( (item, index) => (
             <tr key={index}>
               <td className='col-4'>₡ {item.coin}</td>
               <td className='col-4'>{item.quantity}</td>
               <td>
                 <div className='d-flex text-truncate justify-content-evenly'>
-                <button className='btn btn-outline-danger col-5' onClick={()=>{minusCoin(Alien, setAlien, index)}}>-</button>
-                <button className='btn btn-outline-success col-5' disabled={letfordead} onClick={()=>{plusCoin(Alien, setAlien, index)}}>+</button>
+                  <button className='btn btn-outline-danger col-5' onClick={()=>{minusCoin(userInfo.purse, setUserInfo, index)}}>-</button>
+                  <button className='btn btn-outline-success col-5' disabled={isValid} onClick={()=>{plusCoin(userInfo.purse, setUserInfo, index)}}>+</button>
                 </div>
               </td>
             </tr>
@@ -66,7 +33,7 @@ export const ComadrejaRabin = (props) => {
           <td><h3>Total</h3></td>
           <td>
             <div className='input-group-text'>
-              <b>&nbsp;&nbsp;</b><input type='text' className='form-control form-control-sm text-center text-truncate' value={`₡ ${moneySoFar(Alien)}`} disabled/>
+              <b>&nbsp;&nbsp;</b><input type='text' className='form-control form-control-sm text-center text-truncate' value={`₡ ${currentMoney(userInfo.purse)}`} disabled/>
             </div>
           </td>
           <td></td>
@@ -75,54 +42,34 @@ export const ComadrejaRabin = (props) => {
           <td><h3>To pay</h3></td>
           <td>
             <div className='input-group-text'>
-              <b>&nbsp;&nbsp;</b><input type='text' className='form-control form-control-sm text-center text-truncate' value={`₡ ${props.userInfo.total}`} disabled/>
+              <b>&nbsp;&nbsp;</b><input type='text' className='form-control form-control-sm text-center text-truncate' value={`₡ ${userInfo.total}`} disabled/>
             </div>
           </td>
           <td></td>
         </tr>
         </tbody>
       </table>
-      <div className="d-flex row justify-content-end">
-        <button className='btn btn-light btn-lg'> Pay </button>
+      <div className="d-flex row justify-content-between">
+        <button className='btn btn-outline-secondary bt-sm fw-bold col-3 text-center' onClick={() => props.switchCanvass((prev) => !prev)}>&lt;&lt;</button>
+        <button className='btn btn-outline-light btn-lg col-8' disabled={!isValid && (props.userInfo.total)}> Pay </button>
       </div>
     </>
   );
 };
 
-export default function Transaction(props) {
-  const comadreja = props.Alien.map(item => ({...item, quantity: 0}));
+export default function Canvass(props) {
+  const [Canvass, switchCanvass] = useState(true);
+  props = {...props, switchCanvass}
   return (
     <>
-      <button className='btn btn-light col-2' type='button' data-bs-toggle='offcanvas' data-bs-target='#offcanvasExample' aria-controls='offcanvasExample'
-        onClick={()=>{props.setAlien(comadreja)}}>
-        offcanvas
-      </button>
       <div className='offcanvas offcanvas-start w-45' tabIndex='-1' id='offcanvasExample' aria-labelledby='offcanvasExampleLabel'>
         <div className='offcanvas-body container '>
-          {/*<h1>Bill</h1>
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">Product</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              {props.userInfo.bill.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.name}</td>
-                  <td>{item.quantity}</td>
-                  <td> {props.menu.find(m => m.name === item.name)?.price}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>*/}
-        <ComadrejaRabin className='row'{...props}/>
-          {/*<button className='btn btn-light'> >> </button>*/}
+        {Canvass === false?
+          (<CurrentBill   {...props}/>)
+            :
+          (<ChoosePayment {...props}/>)}
         </div>
       </div>
-
     </>
   );
 }

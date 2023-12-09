@@ -32,12 +32,13 @@ export async function pay(props) {
   const { userInfo, setModalCoffe, refModal } = props;
   try {
     const totalPayment = currentMoney(userInfo.wallet) - userInfo.total;
+    let change = -1;
     const serverResponse = await axios.put(`${serverURL}wallet`, {
       change: totalPayment,
       bill: userInfo.bill
     });
     if (serverResponse.data !== false) {
-      const change = serverResponse.data;
+      change = serverResponse.data;
       props = {...props, change};
       setModalCoffe({
         title: 'Change',
@@ -46,6 +47,15 @@ export async function pay(props) {
         size: "modal-lg"
       });
       refModal.current.click();
+    }
+    else{
+      props = {...props, change};
+      setModalCoffe({
+        title: 'Error',
+        titleStyle: 'bg-danger fw-bold fs-3 text-white bold justify-content-center',
+        component:<ChangeModal {...props}/>,
+        size: "modal-lg"
+      });
     }
     console.log(serverResponse.data);
   } catch (error) {

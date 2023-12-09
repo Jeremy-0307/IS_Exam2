@@ -79,7 +79,7 @@ export const ChangeModal = (props) => {
   return (
     <div className='container'>
       <div className='modal-body'>
-        {props.change.length>0?(<table className="table text-center">
+        {props.change.length !==-1?(<table className="table text-center">
           <thead>
             <tr>
               <th>Coin</th>
@@ -94,7 +94,7 @@ export const ChangeModal = (props) => {
               </tr>
             ))}
           </tbody>
-        </table>):(<h1>No change!</h1>)}
+        </table>):(<h1 className='text-white'>Error! no se pudo realizar la transaccion... :(</h1>)}
       </div>
       <div className='modal-footer container'>
           <button className='btn btn-secondary' data-bs-dismiss="offcanvasExample" data-bs-dismiss='modal' onClick={() => window.location.reload()}>

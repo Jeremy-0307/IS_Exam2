@@ -21,7 +21,7 @@
     {
       "name": "Mocachino",
       "price": 850,
-      "available": 3,
+      "available": 1,
       "img": "/mocachino.png"
     }
   ],
@@ -32,11 +32,11 @@
     },
     {
       "coin": 100,
-      "available": 14
+      "available": 13
     },
     {
       "coin": 50,
-      "available": 34
+      "available": 32
     },
     {
       "coin": 25,

@@ -15,27 +15,27 @@ async function getAll(req) {
 async function getAllAvailable(req) {
   try {
     const coffees = await CoffeeModel.getAll();
-    const availableCoffeees = coffees.filter((c) => c.available > 0);
+    const availableCoffees = coffees.filter((c) => c.available > 0);
 
-    return availableCoffeees;
+    return availableCoffees;
   } catch (error) {
     console.error("Error", error);
     return error;
   }
 };
 
-async function checkEnoughCoffeee(bill) {
-  const availableCoffeees = await CoffeeModel.getAll();
+async function checkEnoughCoffee(bill) {
+  const availableCoffees = await CoffeeModel.getAll();
   let validBill = true;
   const notFound = undefined;
   if(bill !== undefined){
     for (const item of bill) {
-      const coffeee = availableCoffeees.find((c) => c.name === item.name);
-      if (coffeee === notFound) {
+      const coffee = availableCoffees.find((c) => c.name === item.name);
+      if (coffee === notFound) {
         validBill = false;
         break;
       }
-      if (coffeee.available - item.quantity < 0 || item.quantity < 0) {
+      if (coffee.available - item.quantity < 0 || item.quantity < 0) {
         validBill = false;
         break;
       }
@@ -58,5 +58,5 @@ module.exports = {
   getAll,
   update,
   getAllAvailable,
-  checkEnoughCoffeee
+  checkEnoughCoffee
 };

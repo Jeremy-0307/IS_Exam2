@@ -36,9 +36,9 @@ async function calcChange(change) {
 
 async function checkPurchase(bill, change) {
   try {
-    const isCoffeeeAvailable = await CoffeeServices.checkEnoughCoffeee(bill);
+    const isCoffeeAvailable = await CoffeeServices.checkEnoughCoffee(bill);
     
-    if (isCoffeeeAvailable === true) {
+    if (isCoffeeAvailable === true) {
       const moneyAvailable = await getAll();
       const isValidMoney = await calcChange(change, moneyAvailable);
 
